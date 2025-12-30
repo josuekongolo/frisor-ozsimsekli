@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bestill time hos Frisør Ozsimsekli i Spikkestad. Enkel online booking – velg tjeneste, dato og tid.">
+  <meta name="keywords" content="bestill time frisør, book frisør Spikkestad, timebestilling frisør">
+  <title>Bestill time | Frisør Ozsimsekli Spikkestad</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header__container">
+      <a href="index.html" class="header__logo">
+        <span class="header__logo-icon">✂️</span>
+        <span class="header__logo-text">Frisør <span>Ozsimsekli</span></span>
+      </a>
+
+      <nav class="header__nav" id="headerNav">
+        <ul class="header__menu">
+          <li><a href="index.html" class="header__menu-link">Hjem</a></li>
+          <li><a href="tjenester.html" class="header__menu-link">Tjenester</a></li>
+          <li><a href="priser.html" class="header__menu-link">Priser</a></li>
+          <li><a href="om-oss.html" class="header__menu-link">Om oss</a></li>
+          <li><a href="booking.html" class="header__menu-link header__menu-link--active">Booking</a></li>
+          <li><a href="kontakt.html" class="header__menu-link">Kontakt</a></li>
+        </ul>
+        <a href="booking.html" class="btn btn--primary header__cta">Bestill time</a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Åpne meny">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-header__title">Bestill time</h1>
+      <div class="page-header__breadcrumb">
+        <a href="index.html">Hjem</a>
+        <span>/</span>
+        <span>Booking</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction -->
+  <section class="section section--primary" style="padding-bottom: 2rem;">
+    <div class="container container--narrow">
+      <div style="text-align: center;">
+        <p style="font-size: 1.1rem; color: var(--color-text-light); line-height: 1.8;">
+          Velg ønsket tjeneste, dato og tidspunkt, og fyll inn dine kontaktopplysninger. Du vil motta en bekreftelse på e-post.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Wizard -->
+  <section class="section" style="padding-top: 2rem;">
+    <div class="container">
+      <div class="booking-wizard" id="bookingWizard">
+
+        <!-- Progress Indicator -->
+        <div class="booking-progress">
+          <div class="booking-step booking-step--active">
+            <span class="booking-step__number">1</span>
+            <span class="booking-step__label">Velg tjeneste</span>
+          </div>
+          <div class="booking-step">
+            <span class="booking-step__number">2</span>
+            <span class="booking-step__label">Velg tid</span>
+          </div>
+          <div class="booking-step">
+            <span class="booking-step__number">3</span>
+            <span class="booking-step__label">Dine opplysninger</span>
+          </div>
+          <div class="booking-step">
+            <span class="booking-step__number">4</span>
+            <span class="booking-step__label">Bekreft</span>
+          </div>
+        </div>
+
+        <!-- Step 1: Select Service -->
+        <div class="booking-panel booking-panel--active" id="step1">
+          <h2 class="booking-panel__title">Velg tjeneste</h2>
+          <p class="booking-panel__subtitle">Velg først en kategori, deretter ønsket behandling</p>
+
+          <!-- Service Categories -->
+          <div class="service-categories">
+            <button type="button" class="service-category-btn" data-category="dameklipp">✂️ Dameklipp</button>
+            <button type="button" class="service-category-btn" data-category="herreklipp">💈 Herreklipp</button>
+            <button type="button" class="service-category-btn" data-category="barneklipp">⭐ Barneklipp</button>
+            <button type="button" class="service-category-btn" data-category="farge">🎨 Farge</button>
+            <button type="button" class="service-category-btn" data-category="behandlinger">✨ Behandlinger</button>
+            <button type="button" class="service-category-btn" data-category="bryn">👁️ Bryn & vipper</button>
+          </div>
+
+          <!-- Service Options (populated by JS) -->
+          <div class="service-options" id="serviceOptions">
+            <p class="text-muted text-center">Velg en kategori for å se tilgjengelige tjenester</p>
+          </div>
+
+          <!-- Navigation -->
+          <div class="booking-nav">
+            <div></div>
+            <button type="button" class="btn btn--primary" id="toStep2" disabled>Neste →</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Select Date & Time -->
+        <div class="booking-panel" id="step2">
+          <h2 class="booking-panel__title">Velg dato og tid</h2>
+          <p class="booking-panel__subtitle">Velg en ledig dag og tidspunkt</p>
+
+          <!-- Calendar -->
+          <div id="bookingCalendar"></div>
+
+          <!-- Time Slots -->
+          <div class="time-slots">
+            <h4 class="time-slots__title">Ledige tider</h4>
+            <div id="timeSlots">
+              <p class="text-muted text-center">Velg en dato for å se ledige tider</p>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="booking-nav">
+            <button type="button" class="btn btn--secondary" id="backToStep1">← Tilbake</button>
+            <button type="button" class="btn btn--primary" id="toStep3" disabled>Neste →</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Customer Information -->
+        <div class="booking-panel" id="step3">
+          <h2 class="booking-panel__title">Dine opplysninger</h2>
+          <p class="booking-panel__subtitle">Fyll inn kontaktinformasjon</p>
+
+          <form id="customerForm" style="max-width: 500px; margin: 0 auto;">
+            <div class="form-group">
+              <label class="form-label" for="customerName">Navn <span>*</span></label>
+              <input type="text" class="form-input" id="customerName" placeholder="Ditt fulle navn" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="customerPhone">Telefon <span>*</span></label>
+              <input type="tel" class="form-input" id="customerPhone" placeholder="8 siffer" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="customerEmail">E-post <span>*</span></label>
+              <input type="email" class="form-input" id="customerEmail" placeholder="din@epost.no" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="customerComments">Kommentarer (valgfritt)</label>
+              <textarea class="form-textarea" id="customerComments" placeholder="Spesielle ønsker eller informasjon..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-checkbox">
+                <input type="checkbox" id="termsAccepted" required>
+                <span>Jeg godtar at mine opplysninger brukes for å behandle bestillingen</span>
+              </label>
+            </div>
+          </form>
+
+          <!-- Navigation -->
+          <div class="booking-nav" style="max-width: 500px; margin: 2rem auto 0;">
+            <button type="button" class="btn btn--secondary" id="backToStep2">← Tilbake</button>
+            <button type="button" class="btn btn--primary" id="toStep4">Neste →</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Confirmation -->
+        <div class="booking-panel" id="step4">
+          <h2 class="booking-panel__title">Bekreft bestilling</h2>
+          <p class="booking-panel__subtitle">Kontroller at informasjonen er riktig</p>
+
+          <!-- Booking Summary -->
+          <div class="booking-summary" style="max-width: 500px; margin: 0 auto;">
+            <h4 class="booking-summary__title">Din bestilling</h4>
+            <div class="booking-summary__row">
+              <span class="booking-summary__label">Tjeneste</span>
+              <span class="booking-summary__value" id="summaryService">-</span>
+            </div>
+            <div class="booking-summary__row">
+              <span class="booking-summary__label">Pris</span>
+              <span class="booking-summary__value" id="summaryPrice">-</span>
+            </div>
+            <div class="booking-summary__row">
+              <span class="booking-summary__label">Varighet</span>
+              <span class="booking-summary__value" id="summaryDuration">-</span>
+            </div>
+            <div class="booking-summary__row">
+              <span class="booking-summary__label">Dato</span>
+              <span class="booking-summary__value" id="summaryDate">-</span>
+            </div>
+            <div class="booking-summary__row">
+              <span class="booking-summary__label">Tid</span>
+              <span class="booking-summary__value" id="summaryTime">-</span>
+            </div>
+          </div>
+
+          <div class="booking-summary" style="max-width: 500px; margin: 1rem auto;">
+            <h4 class="booking-summary__title">Dine opplysninger</h4>
+            <div class="booking-summary__row">
+              <span class="booking-summary__label">Navn</span>
+              <span class="booking-summary__value" id="summaryName">-</span>
+            </div>
+            <div class="booking-summary__row">
+              <span class="booking-summary__label">Telefon</span>
+              <span class="booking-summary__value" id="summaryPhone">-</span>
+            </div>
+            <div class="booking-summary__row">
+              <span class="booking-summary__label">E-post</span>
+              <span class="booking-summary__value" id="summaryEmail">-</span>
+            </div>
+            <div class="booking-summary__row">
+              <span class="booking-summary__label">Kommentarer</span>
+              <span class="booking-summary__value" id="summaryComments">-</span>
+            </div>
+          </div>
+
+          <!-- Cancellation Policy -->
+          <div style="max-width: 500px; margin: 1.5rem auto; padding: 1rem; background-color: var(--color-secondary); border-radius: var(--radius-md); font-size: 0.875rem; color: var(--color-text-light);">
+            <strong>Avbestilling:</strong> Må skje senest 24 timer før avtalt tid. Ved manglende oppmøte eller sen avbestilling kan det påløpe gebyr.
+          </div>
+
+          <!-- Navigation -->
+          <div class="booking-nav" style="max-width: 500px; margin: 2rem auto 0;">
+            <button type="button" class="btn btn--secondary" id="backToStep3">← Tilbake</button>
+            <button type="button" class="btn btn--primary btn--large" id="confirmBooking">Bekreft bestilling</button>
+          </div>
+        </div>
+
+        <!-- Success Screen -->
+        <div class="booking-panel" id="stepSuccess" style="display: none;">
+          <div class="booking-success">
+            <div class="booking-success__icon">✓</div>
+            <h2 class="booking-success__title">Takk for din bestilling!</h2>
+            <p class="booking-success__message">
+              Din time er registrert. Du vil motta en bekreftelse på e-post til <strong id="successEmail"></strong>.
+            </p>
+
+            <div class="booking-summary" style="max-width: 400px; margin: 2rem auto;">
+              <h4 class="booking-summary__title">Oppsummering</h4>
+              <div class="booking-summary__row">
+                <span class="booking-summary__label">Tjeneste</span>
+                <span class="booking-summary__value" id="successService">-</span>
+              </div>
+              <div class="booking-summary__row">
+                <span class="booking-summary__label">Dato</span>
+                <span class="booking-summary__value" id="successDate">-</span>
+              </div>
+              <div class="booking-summary__row">
+                <span class="booking-summary__label">Tid</span>
+                <span class="booking-summary__value" id="successTime">-</span>
+              </div>
+              <div class="booking-summary__row">
+                <span class="booking-summary__label">Sted</span>
+                <span class="booking-summary__value">Nye Stasjonsvei 17, 3430 Spikkestad</span>
+              </div>
+            </div>
+
+            <p style="color: var(--color-text-light); margin-bottom: 2rem;">
+              Har du spørsmål? Ta kontakt på telefon eller e-post.
+            </p>
+
+            <a href="index.html" class="btn btn--primary">Tilbake til forsiden</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Opening Hours Info -->
+  <section class="section section--primary">
+    <div class="container container--narrow">
+      <div class="section__header">
+        <h3 class="section__title">Åpningstider</h3>
+      </div>
+      <div style="max-width: 400px; margin: 0 auto;">
+        <table class="hours-table">
+          <tr>
+            <td>Mandag</td>
+            <td class="closed">Stengt</td>
+          </tr>
+          <tr>
+            <td>Tirsdag</td>
+            <td>09:00 – 17:00</td>
+          </tr>
+          <tr>
+            <td>Onsdag</td>
+            <td>09:00 – 17:00</td>
+          </tr>
+          <tr>
+            <td>Torsdag</td>
+            <td>09:00 – 17:00</td>
+          </tr>
+          <tr>
+            <td>Fredag</td>
+            <td>09:00 – 17:00</td>
+          </tr>
+          <tr>
+            <td>Lørdag</td>
+            <td>09:00 – 15:00</td>
+          </tr>
+          <tr>
+            <td>Søndag</td>
+            <td class="closed">Stengt</td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <p style="color: var(--color-text-light);">
+          Foretrekker du å ringe? Ta kontakt på <a href="kontakt.html">kontaktsiden</a> for telefonnummer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">Frisør <span>Ozsimsekli</span></div>
+          <p class="footer__description">
+            Din lokale frisørsalong i Spikkestad. Profesjonell hårpleie med personlig touch for hele familien.
+          </p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Facebook">f</a>
+            <a href="#" class="footer__social-link" aria-label="Instagram">📷</a>
+          </div>
+        </div>
+
+        <div class="footer__column">
+          <h4 class="footer__title">Sider</h4>
+          <nav class="footer__links">
+            <a href="index.html" class="footer__link">Hjem</a>
+            <a href="tjenester.html" class="footer__link">Tjenester</a>
+            <a href="priser.html" class="footer__link">Priser</a>
+            <a href="om-oss.html" class="footer__link">Om oss</a>
+            <a href="booking.html" class="footer__link">Booking</a>
+            <a href="kontakt.html" class="footer__link">Kontakt</a>
+          </nav>
+        </div>
+
+        <div class="footer__column">
+          <h4 class="footer__title">Åpningstider</h4>
+          <div class="footer__contact-item">Man: Stengt</div>
+          <div class="footer__contact-item">Tir–Fre: 09:00–17:00</div>
+          <div class="footer__contact-item">Lør: 09:00–15:00</div>
+          <div class="footer__contact-item">Søn: Stengt</div>
+        </div>
+
+        <div class="footer__column">
+          <h4 class="footer__title">Kontakt</h4>
+          <div class="footer__contact-item">Nye Stasjonsvei 17</div>
+          <div class="footer__contact-item">3430 Spikkestad</div>
+          <div class="footer__contact-item" style="margin-top: 1rem;">[Telefonnummer]</div>
+          <div class="footer__contact-item">[E-post]</div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">
+          &copy; 2025 Frisør Ozsimsekli. Org.nr: 936054536. Alle rettigheter reservert.
+        </p>
+        <div class="footer__legal">
+          <a href="#" class="footer__legal-link">Personvern</a>
+          <a href="#" class="footer__legal-link">Vilkår</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>
